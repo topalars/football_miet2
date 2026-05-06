@@ -1,0 +1,54 @@
+services:
+  frontend:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - DATA_DIR=/app/data
+      - COMMENTS_SERVICE_URL=http://comments:8001
+      - NOTIFICATIONS_SERVICE_URL=http://notification:8002
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
+      - ADMIN_SECRET=${ADMIN_SECRET:-change-me-in-prod}
+    volumes:
+      - frontend_data:/app/data
+    depends_on:
+      - comments
+      - notification
+    networks:
+      - pitch_network
+
+  comments:
+    build: ../comments_service
+    expose:
+      - "8001"
+    environment:
+      - CORS_ORIGINS=${CORS_ORIGINS:-http://localhost:3000}
+      - FLASK_DEBUG=${FLASK_DEBUG:-0}
+    volumes:
+      - comments_data:/app
+    networks:
+      - pitch_network
+
+  notification:
+    build: ../notification_service
+    expose:
+      - "8002"
+    environment:
+      - CORS_ORIGINS=${CORS_ORIGINS:-http://localhost:3000}
+      - FLASK_DEBUG=${FLASK_DEBUG:-0}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN:-}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID:-}
+    volumes:
+      - notification_data:/app
+    networks:
+      - pitch_network
+
+volumes:
+  frontend_data:
+  comments_data:
+  notification_data:
+
+networks:
+  pitch_network:
+    driver: bridge

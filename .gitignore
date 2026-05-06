@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+*.egg-info/
+dist/
+build/
+
+# Django
+*.sqlite3
+*.log
+staticfiles/
+mediafiles/
+
+# Environment variables (не коммитим токены!)
+.env
+.env.local
+.env.*.local
+*.env
+
+# Docker volumes data
+data/
+comments.db
+notifications.db
+
+# Node.js / Next.js
+node_modules/
+.next/
+out/
+npm-debug.log*
+package-lock.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+.claude/

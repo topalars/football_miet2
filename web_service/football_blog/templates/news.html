@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="section">
+
+    <div class="page-heading">
+        <h1>Новости футбола</h1>
+        <p>Трансферы, травмы, интервью — всё актуальное прямо здесь.</p>
+    </div>
+
+    <nav class="page-nav" aria-label="Разделы новостей">
+        <h3>Разделы новостей</h3>
+        <ul>
+            <li><a href="#transfers">Трансферы</a></li>
+            <li><a href="#injuries">Травмы</a></li>
+            <li><a href="#interviews">Интервью</a></li>
+        </ul>
+    </nav>
+
+    <div class="cards-grid">
+
+        <!-- Трансферы -->
+        <div class="card" id="transfers">
+            <div class="card-icon">💰</div>
+            <h2>Трансферные новости</h2>
+            <p>
+                <strong>СРОЧНО:</strong> Звездный нападающий переходит в новый клуб.
+            </p>
+            <p>
+                <em>Сумма трансфера</em> составила рекордные 100 миллионов евро.
+            </p>
+
+            <h3>Список трансферов:</h3>
+            <ul class="news-list">
+                <li><span class="quote">Игрок А</span> → Клуб X (50 млн)</li>
+                <li><span class="quote">Игрок Б</span> → Клуб Y (30 млн)</li>
+                <li><span class="quote">Игрок В</span> → Клуб Z (20 млн)</li>
+            </ul>
+
+            <img src="/static/images/transfer.jpg" alt="Трансфер" class="sport-image">
+        </div>
+
+        <!-- Травмы -->
+        <div class="card" id="injuries">
+            <div class="card-icon">🏥</div>
+            <h2>Травмы игроков</h2>
+            <p>
+                <em>К сожалению</em>, несколько ключевых игроков <strong>не смогут</strong> принять участие в ближайших матчах.
+            </p>
+
+            <ol class="news-list">
+                <li>Игрок Г — растяжение (2 недели)</li>
+                <li>Игрок Д — перелом (2 месяца)</li>
+                <li>Игрок Е — дисквалификация (3 матча)</li>
+            </ol>
+        </div>
+
+        <!-- Интервью -->
+        <div class="card" id="interviews">
+            <div class="card-icon">🎙️</div>
+            <h2>Интервью</h2>
+            <p>
+                <span class="quote">"Мы верим в нашу команду"</span> — главный тренер после матча.
+                Читайте полное интервью в нашем разделе.
+            </p>
+
+            <video controls class="sport-video">
+                <source src="/static/videos/interview.mp4" type="video/mp4">
+            </video>
+
+            <p>
+                <a href="/">← Вернуться на главную</a>
+            </p>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

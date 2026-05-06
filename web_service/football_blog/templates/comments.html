@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/comments.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="section">
+
+    <div class="page-heading">
+        <h1>Обсуждение футбола</h1>
+        <p>Делитесь мнениями с другими болельщиками</p>
+    </div>
+
+    <div class="comments-container">
+        <div class="comment-form">
+            <h3>Написать комментарий</h3>
+            <input type="text" id="comment-username" placeholder="Ваше имя" maxlength="50">
+            <textarea id="comment-text" placeholder="Ваш комментарий..." rows="3" maxlength="500"></textarea>
+            <button id="submit-comment">Отправить</button>
+        </div>
+
+        <div class="comments-list" id="comments-list">
+            <div class="loading">Загрузка комментариев...</div>
+        </div>
+    </div>
+
+</div>
+
+<script src="{% static 'js/comments.js' %}"></script>
+{% endblock %}

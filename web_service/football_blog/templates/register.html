@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="section form-page-section">
+
+    <div class="page-heading">
+        <h1>Регистрация</h1>
+        <p>Создайте аккаунт на футбольном портале</p>
+    </div>
+
+    <div class="form-container">
+        <form id="registrationForm" class="registration-form" novalidate>
+            <h2>Создать аккаунт</h2>
+
+            <!-- Имя -->
+            <div class="form-group">
+                <label for="firstname">Имя</label>
+                <input type="text"
+                       id="firstname"
+                       name="firstname"
+                       placeholder="Иван"
+                       required
+                       pattern="[А-ЯA-Z][а-яa-z]+"
+                       title="Имя должно начинаться с заглавной буквы, затем только строчные буквы">
+                <span class="error-message" id="firstname-error"></span>
+                <small>Только буквы, первая заглавная</small>
+            </div>
+
+            <!-- Фамилия -->
+            <div class="form-group">
+                <label for="lastname">Фамилия</label>
+                <input type="text"
+                       id="lastname"
+                       name="lastname"
+                       placeholder="Иванов"
+                       required
+                       pattern="[А-ЯA-Z][а-яa-z]+"
+                       title="Фамилия должна начинаться с заглавной буквы, затем только строчные буквы">
+                <span class="error-message" id="lastname-error"></span>
+                <small>Только буквы, первая заглавная</small>
+            </div>
+
+            <!-- Логин -->
+            <div class="form-group">
+                <label for="username">Логин</label>
+                <input type="text"
+                       id="username"
+                       name="username"
+                       placeholder="fanfootball2024"
+                       required
+                       minlength="3"
+                       maxlength="20">
+                <span class="error-message" id="username-error"></span>
+                <small>От 3 до 20 символов</small>
+            </div>
+
+            <!-- Пароль -->
+            <div class="form-group">
+                <label for="password">Пароль</label>
+                <input type="password"
+                       id="password"
+                       name="password"
+                       placeholder="********"
+                       required
+                       minlength="6"
+                       autocomplete="new-password">
+                <span class="error-message" id="password-error"></span>
+                <small>Минимум 6 символов</small>
+            </div>
+
+            <!-- Подтверждение пароля -->
+            <div class="form-group">
+                <label for="confirm-password">Подтвердите пароль</label>
+                <input type="password"
+                       id="confirm-password"
+                       name="confirm-password"
+                       placeholder="********"
+                       required
+                       autocomplete="new-password">
+                <span class="error-message" id="confirm-password-error"></span>
+                <small>Пароли должны совпадать</small>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group optional">
+                <label for="email">Email</label>
+                <input type="email"
+                       id="email"
+                       name="email"
+                       placeholder="fan@football.com">
+                <span class="error-message" id="email-error"></span>
+                <small>Необязательное поле. Введите корректный email</small>
+            </div>
+
+            <!-- Телефон (необязательное) -->
+            <div class="form-group optional">
+                <label for="phone">Телефон</label>
+                <input type="tel"
+                       id="phone"
+                       name="phone"
+                       placeholder="+7-999-999-99-99"
+                       pattern="\+7-[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}">
+                <span class="error-message" id="phone-error"></span>
+                <small>Необязательное поле. Формат: +7-999-999-99-99</small>
+            </div>
+
+            <!-- Кнопка -->
+            <button type="submit" id="submit-btn">Зарегистрироваться</button>
+        </form>
+    </div>
+
+</div>
+
+<script src="{% static 'js/validation.js' %}"></script>
+{% endblock %}

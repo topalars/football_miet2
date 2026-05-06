@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="section">
+
+    <div class="page-heading">
+        <h1>Расписание матчей</h1>
+        <p>Все матчи сегодня, завтра и в эти выходные.</p>
+    </div>
+
+    <nav class="page-nav" aria-label="Навигация по расписанию">
+        <h3>Период</h3>
+        <ul>
+            <li><a href="#today">Сегодня</a></li>
+            <li><a href="#tomorrow">Завтра</a></li>
+            <li><a href="#weekend">Выходные</a></li>
+        </ul>
+    </nav>
+
+    <div class="cards-grid">
+
+        <!-- Сегодня -->
+        <div class="card" id="today">
+            <div class="card-icon">📅</div>
+            <h2>Матчи сегодня</h2>
+            <p>
+                <strong>Важно:</strong> Все матчи начинаются вовремя.
+            </p>
+            <p>
+                <em>Трансляции</em> доступны на нашем сайте.
+            </p>
+
+            <h3>Расписание:</h3>
+            <ol class="news-list">
+                <li>Команда А — Команда Б <span class="quote">19:00</span></li>
+                <li>Команда В — Команда Г <span class="quote">21:00</span></li>
+                <li>Команда Д — Команда Е <span class="quote">23:00</span></li>
+            </ol>
+
+            <img src="/static/images/schedule.jpg" alt="Расписание" class="sport-image">
+        </div>
+
+        <!-- Завтра -->
+        <div class="card" id="tomorrow">
+            <div class="card-icon">🗓️</div>
+            <h2>Завтрашние матчи</h2>
+            <ul class="news-list">
+                <li><strong>Кубок:</strong> Команда Ж — Команда З</li>
+                <li><strong>Чемпионат:</strong> Команда И — Команда К</li>
+                <li><strong>Лига:</strong> Команда Л — Команда М</li>
+            </ul>
+        </div>
+
+        <!-- Выходные -->
+        <div class="card" id="weekend">
+            <div class="card-icon">🏟️</div>
+            <h2>Турнирная таблица</h2>
+            <ol class="news-list">
+                <li>Группа А
+                    <ul>
+                        <li>1 место — Команда Н</li>
+                        <li>2 место — Команда О</li>
+                    </ul>
+                </li>
+                <li>Группа Б
+                    <ul>
+                        <li>1 место — Команда П</li>
+                        <li>2 место — Команда Р</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <p>
+                <a href="/news/">Новости о матчах</a> |
+                <a href="/">Главная</a>
+            </p>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

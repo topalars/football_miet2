@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Футбольный обозреватель — новости, матчи, аналитика и интервью">
+    <title>Футбольный обозреватель</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/css/style.css">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+    {% csrf_token %}
+
+    <!-- ===== HEADER ===== -->
+    <header class="fixed-menu" role="banner">
+        <div class="menu-container">
+            <div class="logo">
+                <span>⚽</span>
+                Футбол<span>Observer</span>
+            </div>
+            <nav aria-label="Основная навигация">
+                <ul class="nav-menu">
+                    <li><a href="/" id="nav-home">Главная</a></li>
+                    <li><a href="/news/" id="nav-news">Новости</a></li>
+                    <li><a href="/matches/" id="nav-matches">Матчи</a></li>
+                    <li><a href="/register/" id="nav-register">Регистрация</a></li>
+                    <li><a href="/feedback/" id="nav-feedback">Обратная связь</a></li>
+                    <li><a href="/comments/" id="nav-comments">Комментарии</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== CONTENT ===== -->
+    <main class="content" role="main">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Active nav link highlight -->
+    <script>
+        (function() {
+            var path = window.location.pathname;
+            document.querySelectorAll('.nav-menu a').forEach(function(a) {
+                if (a.getAttribute('href') === path ||
+                    (path !== '/' && a.getAttribute('href') !== '/' && path.startsWith(a.getAttribute('href')))) {
+                    a.classList.add('active');
+                }
+            });
+        })();
+    </script>
+
+</body>
+</html>

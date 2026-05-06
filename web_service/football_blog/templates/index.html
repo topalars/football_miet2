@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- ===== HERO ===== -->
+<section class="hero" aria-labelledby="hero-title">
+    <div class="hero-inner">
+        <div class="hero-badge">⚡ Главный футбольный портал</div>
+        <h1 id="hero-title">
+            Футбол — это<br>
+            <span class="accent">больше, чем игра</span>
+        </h1>
+        <p class="hero-sub">
+            Актуальные новости, обзоры матчей, трансферы и аналитика — всё в одном месте.
+        </p>
+        <div class="hero-actions">
+            <a href="/news/" class="btn-primary" id="hero-cta-news">Читать новости →</a>
+            <a href="/matches/" class="btn-secondary" id="hero-cta-matches">Матчи</a>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== MAIN CARDS SECTION ===== -->
+<div class="section" id="main-content">
+
+    <!-- Page Navigation -->
+    <nav class="page-nav" aria-label="Быстрая навигация">
+        <h3>На этой странице</h3>
+        <ul>
+            <li><a href="#news">Новости дня</a></li>
+            <li><a href="#video">Видеообзор</a></li>
+            <li><a href="#table">Таблица лиг</a></li>
+        </ul>
+    </nav>
+
+    <!-- Cards Grid -->
+    <div class="section-header">
+        <div class="section-label">Сегодня на портале</div>
+        <h2 class="section-title">Актуальные материалы</h2>
+        <p class="section-desc">Следите за самыми важными событиями мирового футбола в реальном времени.</p>
+    </div>
+
+    <div class="cards-grid">
+
+        <!-- Новости -->
+        <div class="card" id="news">
+            <div class="card-icon">📰</div>
+            <h2>Последние новости</h2>
+            <p>
+                <span class="quote">"Это невероятный матч!"</span> — так комментируют эксперты
+                вчерашнюю игру между командами.
+            </p>
+            <p>
+                <em>Сегодня</em> состоится <strong>важнейший</strong> матч сезона.
+                Начало в 20:00 по московскому времени.
+            </p>
+        </div>
+
+        <!-- Фото матча -->
+        <div class="card">
+            <div class="card-icon">📸</div>
+            <h2>Фото матча</h2>
+            <img src="/static/images/match.jpg" alt="Футбольный матч" class="sport-image">
+            <p>Нападающий забивает победный гол</p>
+        </div>
+
+        <!-- Бомбардиры -->
+        <div class="card" id="table">
+            <div class="card-icon">🏆</div>
+            <h2>Лучшие бомбардиры</h2>
+            <ol class="news-list">
+                <li>Игрок 1 — 15 голов</li>
+                <li>Игрок 2 — 12 голов</li>
+                <li>Игрок 3 — 10 голов</li>
+            </ol>
+
+            <h3>Предстоящие матчи</h3>
+            <ul class="news-list">
+                <li>Команда А vs Команда Б</li>
+                <li>Команда В vs Команда Г</li>
+                <li>Команда Д vs Команда Е</li>
+            </ul>
+        </div>
+
+        <!-- Видеообзор -->
+        <div class="card card-full" id="video">
+            <div class="card-icon">🎬</div>
+            <h2>Видеообзор матча</h2>
+            <video controls class="sport-video">
+                <source src="/static/videos/match.mp4" type="video/mp4">
+                Ваш браузер не поддерживает видео.
+            </video>
+        </div>
+
+        <!-- Ссылки -->
+        <div class="card">
+            <div class="card-icon">🔗</div>
+            <h2>Полезные разделы</h2>
+            <p>
+                Читайте <a href="/news/">новости футбола</a> и
+                <a href="/matches/">расписание матчей</a>.
+            </p>
+        </div>
+
+        <!-- Горячая новость -->
+        <div class="card">
+            <div class="card-icon">🔥</div>
+            <h2>Горячая новость</h2>
+            <div class="alert-breaking">
+                <p>⚡ Финал чемпионата перенесен на следующую неделю! ⚡</p>
+            </div>
+        </div>
+
+    </div><!-- /cards-grid -->
+</div><!-- /section -->
+
+{% endblock %}
