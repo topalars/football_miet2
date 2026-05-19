@@ -114,10 +114,63 @@ img, video {
   display: flex;
   align-items: center;
   gap: 8px;
+  text-decoration: none;
 }
 
 .logo span {
   color: var(--blue-600);
+}
+
+/* ---------- Burger button (mobile only) ---------- */
+.burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 1002;
+}
+
+.burger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--gray-800);
+  border-radius: 2px;
+  transition: transform var(--transition), opacity var(--transition);
+  transform-origin: center;
+}
+
+.burger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.burger.open span:nth-child(2) {
+  opacity: 0;
+}
+.burger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ---------- Overlay (mobile menu backdrop) ---------- */
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.45);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 998;
+}
+
+.nav-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .nav-menu {
@@ -588,16 +641,91 @@ h4, h5, h6 { color: var(--gray-600); margin-bottom: 6px; }
 }
 
 /* ---------- Responsive ---------- */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .menu-container { padding: 0 20px; }
-  .nav-menu { gap: 0; }
-  .nav-menu a { font-size: 13px; padding: 5px 10px; }
   .logo { font-size: 17px; }
 
-  .hero { padding: 70px 20px 60px; }
+  /* Включаем бургер */
+  .burger { display: flex; }
+
+  /* Превращаем меню в выезжающую панель справа */
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: min(82vw, 320px);
+    background: var(--white);
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0;
+    padding: calc(var(--nav-height) + 16px) 24px 32px;
+    box-shadow: -10px 0 40px rgba(0, 0, 0, 0.1);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 999;
+    overflow-y: auto;
+  }
+
+  .nav-menu.open {
+    transform: translateX(0);
+  }
+
+  .nav-menu li {
+    width: 100%;
+  }
+
+  .nav-menu a {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 14px 16px;
+    border-radius: var(--radius-md);
+    color: var(--gray-700);
+  }
+
+  .nav-menu a:hover,
+  .nav-menu a.active {
+    background: var(--blue-50);
+    color: var(--blue-600);
+  }
+
+  .hero { padding: 80px 20px 60px; }
   .section { padding: 52px 20px; }
+  .hero h1 { letter-spacing: -1px; }
+  .hero-sub { font-size: 16px; }
+
+  .hero-actions { gap: 10px; }
+  .btn-primary, .btn-secondary {
+    padding: 12px 22px;
+    font-size: 14px;
+  }
 }
 
 @media (max-width: 480px) {
-  .nav-menu { display: none; }
+  .menu-container { padding: 0 16px; }
+  .logo { font-size: 16px; }
+  .logo span:first-child { font-size: 22px; }
+
+  .hero { padding: 70px 16px 50px; }
+  .section { padding: 40px 16px; }
+
+  .card { padding: 22px 18px; }
+
+  /* На очень маленьких экранах — растягиваем кнопки на всю ширину */
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .btn-primary, .btn-secondary {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+/* ---------- Touch-friendly: убираем hover transform на тач-устройствах ---------- */
+@media (hover: none) {
+  .card:hover { transform: none; }
+  .btn-primary:hover, .btn-secondary:hover { transform: none; }
 }

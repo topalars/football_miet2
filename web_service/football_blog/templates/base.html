@@ -2,7 +2,8 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#2563eb">
     <meta name="description" content="Футбольный обозреватель — новости, матчи, аналитика и интервью">
     <title>Футбольный обозреватель</title>
 
@@ -20,12 +21,20 @@
     <!-- ===== HEADER ===== -->
     <header class="fixed-menu" role="banner">
         <div class="menu-container">
-            <div class="logo">
+            <a href="/" class="logo" aria-label="На главную">
                 <span>⚽</span>
                 Футбол<span>Observer</span>
-            </div>
+            </a>
+
+            <!-- Бургер-кнопка (видна только на мобильных) -->
+            <button class="burger" id="burger-btn" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
             <nav aria-label="Основная навигация">
-                <ul class="nav-menu">
+                <ul class="nav-menu" id="nav-menu">
                     <li><a href="/" id="nav-home">Главная</a></li>
                     <li><a href="/news/" id="nav-news">Новости</a></li>
                     <li><a href="/matches/" id="nav-matches">Матчи</a></li>
@@ -35,6 +44,9 @@
                 </ul>
             </nav>
         </div>
+
+        <!-- Затемнение позади открытого меню -->
+        <div class="nav-overlay" id="nav-overlay"></div>
     </header>
 
     <!-- ===== CONTENT ===== -->
@@ -43,15 +55,52 @@
         {% endblock %}
     </main>
 
-    <!-- Active nav link highlight -->
+    <!-- Active nav link highlight + бургер-меню -->
     <script>
         (function() {
+            // Подсветка активной ссылки
             var path = window.location.pathname;
             document.querySelectorAll('.nav-menu a').forEach(function(a) {
                 if (a.getAttribute('href') === path ||
                     (path !== '/' && a.getAttribute('href') !== '/' && path.startsWith(a.getAttribute('href')))) {
                     a.classList.add('active');
                 }
+            });
+
+            // Бургер-меню
+            var burger = document.getElementById('burger-btn');
+            var menu = document.getElementById('nav-menu');
+            var overlay = document.getElementById('nav-overlay');
+
+            function closeMenu() {
+                burger.classList.remove('open');
+                menu.classList.remove('open');
+                overlay.classList.remove('open');
+                burger.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            }
+
+            function toggleMenu() {
+                var isOpen = menu.classList.toggle('open');
+                burger.classList.toggle('open', isOpen);
+                overlay.classList.toggle('open', isOpen);
+                burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                document.body.style.overflow = isOpen ? 'hidden' : '';
+            }
+
+            if (burger) {
+                burger.addEventListener('click', toggleMenu);
+            }
+            if (overlay) {
+                overlay.addEventListener('click', closeMenu);
+            }
+            // Закрывать меню при клике по любой ссылке
+            menu.querySelectorAll('a').forEach(function(a) {
+                a.addEventListener('click', closeMenu);
+            });
+            // Esc закрывает меню
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeMenu();
             });
         })();
     </script>
