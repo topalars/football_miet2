@@ -134,6 +134,7 @@ img, video {
   cursor: pointer;
   padding: 8px;
   z-index: 1002;
+  margin-left: auto; /* прижать к правому краю */
 }
 
 .burger span {
@@ -642,8 +643,11 @@ h4, h5, h6 { color: var(--gray-600); margin-bottom: 6px; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
-  .menu-container { padding: 0 20px; }
+  .menu-container { padding: 0 16px; }
   .logo { font-size: 17px; }
+
+  /* <nav> теряет визуальный смысл — внутри только fixed-меню */
+  .menu-container > nav { display: contents; }
 
   /* Включаем бургер */
   .burger { display: flex; }
