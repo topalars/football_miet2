@@ -3,6 +3,7 @@ import logging
 import re
 
 import requests
+from django.conf import settings
 from django.contrib.auth.hashers import make_password
 from django.core.exceptions import ValidationError
 from django.core.validators import EmailValidator
@@ -140,7 +141,7 @@ def api_feedback(request):
 
     try:
         response = requests.post(
-            'http://notification:8002/notifications', json=payload, timeout=5
+            f'{settings.NOTIFICATION_SERVICE_URL}/notifications', json=payload, timeout=5
         )
         if response.status_code == 200:
             return JsonResponse({'success': True, 'message': 'Сообщение отправлено'})
@@ -158,7 +159,7 @@ def api_feedback(request):
 @require_http_methods(["GET"])
 def api_comments(request):
     try:
-        response = requests.get('http://comments:8001/comments', timeout=5)
+        response = requests.get(f'{settings.COMMENTS_SERVICE_URL}/comments', timeout=5)
         if response.status_code == 200:
             return JsonResponse({'success': True, 'comments': response.json().get('comments', [])})
         return JsonResponse(
@@ -190,7 +191,7 @@ def api_add_comment(request):
 
     try:
         response = requests.post(
-            'http://comments:8001/comments', json=payload, timeout=5
+            f'{settings.COMMENTS_SERVICE_URL}/comments', json=payload, timeout=5
         )
         if response.status_code == 200:
             return JsonResponse({'success': True, 'message': 'Комментарий добавлен'})

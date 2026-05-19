@@ -10,6 +10,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
+# Railway передаёт порт через $PORT; локально по умолчанию 8002.
+ENV PORT=8002
 EXPOSE 8002
 
-CMD ["gunicorn", "-b", "0.0.0.0:8002", "-w", "2", "app:app"]
+CMD ["sh", "-c", "gunicorn -b 0.0.0.0:${PORT} -w 2 app:app"]

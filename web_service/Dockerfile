@@ -10,12 +10,17 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
+# Railway передаёт порт через $PORT; локально по умолчанию 8000.
+ENV PORT=8000
 EXPOSE 8000
 
-# В DEV (DJANGO_DEBUG=1) запускается runserver, в PROD — gunicorn.
-CMD ["sh", "-c", "if [ \"$DJANGO_DEBUG\" = \"1\" ]; then \
-        cd football_blog && python manage.py migrate --noinput && python manage.py runserver 0.0.0.0:8000; \
+# В DEV (DJANGO_DEBUG=1) — runserver, в PROD — gunicorn + collectstatic + migrate.
+CMD ["sh", "-c", "cd football_blog && \
+    if [ \"$DJANGO_DEBUG\" = \"1\" ]; then \
+        python manage.py migrate --noinput && \
+        python manage.py runserver 0.0.0.0:${PORT}; \
     else \
-        cd football_blog && python manage.py migrate --noinput && \
-        gunicorn -b 0.0.0.0:8000 -w 2 football_blog.wsgi:application; \
+        python manage.py collectstatic --noinput && \
+        python manage.py migrate --noinput && \
+        gunicorn -b 0.0.0.0:${PORT} -w 2 football_blog.wsgi:application; \
     fi"]
